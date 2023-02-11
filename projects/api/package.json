@@ -1,0 +1,26 @@
+{
+  "name": "api",
+  "scripts": {
+    "dev": "pm2 start ./config/pm2.wds.json",
+    "prod": "pm2 start ./config/pm2.prod.json"
+  },
+  "dependencies": {
+    "axios": "^0.20.0",
+    "axios-extra": "0.0.5",
+    "child_process": "^1.0.2",
+    "dayjs": "^1.11.7",
+    "kcors": "^2.2.2",
+    "koa": "^2.6.1",
+    "koa-body": "^4.2.0",
+    "koa-onerror": "^4.1.0",
+    "koa-router": "^9.4.0",
+    "koa-static": "^5.0.0",
+    "lodash": "^4.17.20",
+    "mysql2": "^2.2.5",
+    "path": "^0.12.7",
+    "random-string": "^0.2.0",
+    "sequelize": "^6.3.5",
+    "stack-trace": "0.0.10",
+    "winston": "^3.1.0"
+  }
+}
