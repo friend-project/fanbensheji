@@ -4,8 +4,8 @@ import { Layout, Menu, theme } from 'antd'
 import {
     FundProjectionScreenOutlined,
     ReadOutlined,
-    VideoCameraAddOutlined,
-    VerifiedOutlined,
+    // VideoCameraAddOutlined,
+    // VerifiedOutlined,
     TeamOutlined,
     CommentOutlined,
 } from '@ant-design/icons'
@@ -29,6 +29,7 @@ export default () => {
             name: '工作流程',
             nick: 'workflow',
         }, {
+            /*
             icon: VideoCameraAddOutlined,
             name: '媒体发布',
             nick: 'press',
@@ -37,6 +38,7 @@ export default () => {
             name: '获奖证书',
             nick: 'awards',
         }, {
+            */
             icon: TeamOutlined,
             name: '关于我们',
             nick: 'about',

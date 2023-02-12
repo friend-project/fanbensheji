@@ -1,0 +1,11 @@
+.ant-table-tbody {
+    .ant-table-cell {
+        white-space: nowrap;
+    }
+    .ant-table-cell:nth-child(4),
+    .ant-table-cell:nth-child(5) {
+        word-break: break-all;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+    }
+}

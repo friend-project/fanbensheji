@@ -10,8 +10,8 @@ import Header from '../components/header'
 import Nav from '../components/nav'
 
 import Project from './project'
+import ProjectEdit from './project/edit'
 import Workflow from './workflow'
-import WorkflowEdit from './workflow/edit'
 import Press from './press'
 import Awards from './awards'
 import About from './about'
@@ -43,8 +43,13 @@ const App = () => {
             }}
           >
             <Routes>
+              <Route
+                path="/"
+                element={(<Navigate to='/main/contact' />)}
+              />
               <Route path="project" element={<Project />} />
-              <Route path="project/:id" element={<Project />} />
+              <Route path="project/add" element={<ProjectEdit />} />
+              <Route path="project/edit/:id" element={<ProjectEdit />} />
               <Route path="workflow" element={<Workflow />} />
               <Route path="press" element={<Press />} />
               <Route path="awards" element={<Awards />} />
