@@ -10,20 +10,15 @@
     }
 }
 
-// add/edit
-.edit {
-    .row {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        margin: 0 0 20px 0;
-    
-        & > p {
-            width: 50px;
-        }
+.modal {
+    display: flex;
+    margin: 0 0 20px;
+
+    .left {
+        width: 60px;
     }
 
-    .ql-container.ql-snow {
-        min-height: 300px;
+    .ant-input-number {
+        width: 100%;
     }
 }

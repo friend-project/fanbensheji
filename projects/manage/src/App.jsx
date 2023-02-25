@@ -11,8 +11,6 @@ import Login from './pages/login'
 function App() {
   const [cookies] = useCookies([])
 
-  console.log('cookies', cookies.userjwt)
-
   return (
     <Routes>
         <Route

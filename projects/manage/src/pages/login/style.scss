@@ -5,21 +5,21 @@
     transform: translateX(-50%) translateY(-50%);
 
     width: 400px;
-}
 
-.row {
-    margin: 0 0 20px;
+    .row {
+        margin: 0 0 20px;
 
-    span {
-        width: 60px;
+        span {
+            width: 60px;
+        }
+
+        input {
+            width: calc(100% - 60px);
+        }
     }
 
-    input {
-        width: calc(100% - 60px);
+    .button {
+        display: block;
+        margin: 0 auto;
     }
-}
-
-.button {
-    display: block;
-    margin: 0 auto;
 }

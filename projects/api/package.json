@@ -1,7 +1,7 @@
 {
   "name": "api",
   "scripts": {
-    "dev": "pm2 start ./config/pm2.wds.json",
+    "dev": "nodemon ./bin",
     "prod": "pm2 start ./config/pm2.prod.json"
   },
   "dependencies": {

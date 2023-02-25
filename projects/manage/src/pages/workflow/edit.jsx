@@ -82,7 +82,7 @@ export default ({
             },
             'PUT',
         )
-        setEdit(null)
+        setEdit(true)
     }
 
     return (

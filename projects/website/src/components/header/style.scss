@@ -1,0 +1,52 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .logo {
+    margin: 22px auto;
+
+    img {
+      width: 150px;
+      cursor: pointer;
+    }
+  }
+
+  ul {
+    display: flex;
+    align-items: center;
+
+    height: 54px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+
+  li {
+    height: 54px;
+    margin: 0 10px;
+
+    transform: translateY(0);
+    transition: transform .5s;
+
+    &:hover {
+      cursor: pointer;
+      color: red;
+      transform: translateY(-54px);
+    }
+
+    p {
+      height: 54px;
+
+      color: #303133;
+      font-size: 12px;
+      line-height: 54px;
+      text-align: center;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    &.active {
+      color: #ff590a;
+    }
+  }
+}

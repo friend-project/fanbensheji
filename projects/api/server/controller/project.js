@@ -3,36 +3,67 @@ const fs = require('fs')
 const path = require('path')
 const tool = require('../../library/tool')
 
+const getProjectList = async (ctx) => {
+  let rst = await ctx.sql.project
+    .findAll({
+      attributes: [
+        'id',
+        'tag',
+        'title',
+        'banner',
+        'year',
+        'recommend',
+        'create_time',
+        'update_time',
+      ],
+      order: [
+        ['id', 'ASC'],
+      ],
+    })
+  rst = rst.map(
+    (v) => ({
+      ...v.dataValues,
+      time: tool.formatTime(v.dataValues.create_time, 'YYYY-MM-DD HH:mm:ss')
+    })
+  )
+  return rst
+}
+
+const getProjectDetail = async (ctx, id) => {
+  let rst = await ctx.sql.project
+    .findOne({
+      attributes: [
+        'id',
+        'tag',
+        'title',
+        'banner',
+        'year',
+        'recommend',
+        'content',
+        'create_time',
+        'update_time',
+      ],
+      where: {
+        id,
+      }
+    })
+  return rst
+}
+
 const getProject = async (ctx) => {
   try {
-    const rst = await ctx.sql.project
-      .findAll({
-        attributes: [
-          'id',
-          'tag',
-          'title',
-          'banner',
-          'year',
-          'recommend',
-          'create_time',
-          'update_time',
-        ],
-        order: [
-          ['id', 'ASC'],
-        ],
-      })
-
-    const a = rst.map(
-      (v) => ({
-        ...v.dataValues,
-        time: tool.formatTime(v.dataValues.create_time, 'YYYY-MM-DD HH:mm:ss')
-      })
-    )
+    const { id } = ctx.request.query
+    let rst = null
+    if (id) {
+      rst = await getProjectDetail(ctx, id)
+    } else {
+      rst = await getProjectList(ctx)
+    }
 
     ctx.body = {
       code: rst ? 0 : 1,
       msg: !rst ? '没有匹配的查询结果' : '',
-      data: a || [],
+      data: rst || (id ? {} : []),
     }
   } catch (err) {
     ctx.logger.error(err)
@@ -48,26 +79,27 @@ const putProject = async (ctx) => {
   try {
     const {
       id,
-      icon,
+      tag,
       title,
-      describe,
-      price,
-      turn,
+      banner,
+      year,
+      recommend,
+      content,
     } = ctx.request.body
 
     let rst = { id }
     let msg = ''
 
     if (id) {
-      rst = await ctx.sql.workflow
+      rst = await ctx.sql.project
         .update(
           {
-            id,
-            icon,
+            tag,
             title,
-            describe,
-            price,
-            turn,
+            banner,
+            year,
+            recommend,
+            content,
           }, {
             where: {
               id,
@@ -75,13 +107,14 @@ const putProject = async (ctx) => {
           }
         )
     } else {
-      rst = await ctx.sql.workflow
+      rst = await ctx.sql.project
         .create({
-          icon,
+          tag,
           title,
-          describe,
-          price,
-          turn,
+          banner,
+          year,
+          recommend,
+          content,
         })
     }
 
@@ -89,7 +122,7 @@ const putProject = async (ctx) => {
     ctx.body = {
       code: rst ? 0 : 1,
       msg: !rst ? '失败' : '',
-      data: a || [],
+      data: rst || [],
     }
   } catch (err) {
     ctx.logger.error(err)
@@ -107,7 +140,7 @@ const dltProject = async (ctx) => {
       id,
     } = ctx.request.body
 
-    rst = await ctx.sql.workflow
+    rst = await ctx.sql.project
       .destroy(
         {
           where: {

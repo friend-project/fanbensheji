@@ -16,6 +16,7 @@ import './style.scss'
 export default () => {
     const navigate = useNavigate()
     const [data, setData] = useState([])
+    const [tags, setTags] = useState([])
 
     const columns = [
         {
@@ -26,6 +27,7 @@ export default () => {
             title: '标签',
             dataIndex: 'tag',
             key: 'tag',
+            render: (tag) => (tags?.find(m => m.id === tag)?.tag),
         }, {
             title: '图标',
             dataIndex: 'banner',
@@ -43,7 +45,7 @@ export default () => {
             title: '推荐',
             dataIndex: 'recommend',
             key: 'recommend',
-            render: (recommend) => (recommend ? '推荐' : '')
+            render: (recommend) => (recommend ? '推荐' : '不推荐')
         }, {
             title: '操作',
             dataIndex: 'id',
@@ -83,10 +85,20 @@ export default () => {
             {},
             'GET',
         )
+        const rstTag = await r(
+            '/tag',
+            {},
+            'GET'
+        )
         if (rst.code) {
             message.error('请求错误！！！')
         } else {
             setData(rst.data)
+        }
+        if (rstTag.code) {
+            message.error('请求错误！！！')
+        } else {
+            setTags(rstTag.data)
         }
     }
     const deleteData = async (id) => {

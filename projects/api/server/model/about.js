@@ -1,16 +1,15 @@
 const Sequelize = require('sequelize')
 const sequelize = require('../../library/sequelize')
 
-const tag = sequelize.define(
-  'tag',
+const about = sequelize.define(
+  'about',
   {
     id: {
       primaryKey: true,
       autoIncrement: true,
       type: Sequelize.INTEGER,
     },
-    tag: Sequelize.STRING(128),
-    nick: Sequelize.STRING(128),
+    content: Sequelize.STRING,
   },
   {
     timestamps: true,
@@ -19,4 +18,4 @@ const tag = sequelize.define(
   },
 )
 
-module.exports = tag
+module.exports = about
