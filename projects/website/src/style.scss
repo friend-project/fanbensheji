@@ -28,3 +28,16 @@ p {
   background: #ff590a;
   color: #ffffff !important;
 }
+
+.wrap {
+  max-width: 1128px;
+  margin: 0 auto;
+
+  .title {
+    padding: 36px;
+
+    font-size: 16px;
+    text-align: center;
+    color: #8E8E8E;
+  }
+}

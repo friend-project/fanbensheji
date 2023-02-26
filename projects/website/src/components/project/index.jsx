@@ -18,9 +18,9 @@ export default () => {
   useEffect(() => { getData() }, [])
 
   return (
-    <div className="project">
+    <div className="wrap">
       <div className="title">PROJECT 作品</div>
-      <div className="content">
+      <div className="project">
         <div className="inner">
           {
             data.map(

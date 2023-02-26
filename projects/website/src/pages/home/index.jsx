@@ -5,6 +5,7 @@ import About from '../../components/about'
 import Project from '../../components/project'
 import Workflow from '../../components/workflow'
 import Contact from '../../components/contact'
+import Footer from '../../components/footer'
 
 export default () => {
   return (
@@ -14,6 +15,7 @@ export default () => {
       {false ? <Project /> : null}
       {false ? <Workflow /> : null}
       {true ? <Contact /> : null}
+      {true ? <Footer /> : null}
     </>
   )
 }

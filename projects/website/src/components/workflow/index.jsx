@@ -17,9 +17,9 @@ export default () => {
   useEffect(() => { getData() }, [])
 
   return (
-    <div className="workflow">
+    <div className="wrap">
       <div className="title">WORKFLOW 工作流程</div>
-      <div className="content">
+      <div className="workflow">
         {
           data.map(
             (v, i) => (

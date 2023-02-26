@@ -16,35 +16,38 @@ export default () => {
   useEffect(() => { getData() }, [])
 
   return (
-    <div className="about">
-      <div className="title">ABOUT 关于梵本</div>
-      <div className="content">
+    <div className="wrap">
+      <div className="title">CONTACT 联系我们</div>
+      <div className="contact">
         <div className="row">
           <div>
             <p>梵本设计 Fanben Design</p>
-            <p>TEL: 139 1125 8805</p>
-            <p>E-mail: fanbensheji@126.com</p>
-            <p>北京市朝阳区北苑东路乐想汇3号楼831</p>
+            <p>电话：139 1125 8805</p>
+            <p>邮箱：fanbensheji@126.com</p>
+            <p>地址：北京市朝阳区北苑东路乐想汇3号楼831</p>
           </div>
-          <div>
-            姓名：*
+          <div className="input" style={{ marginTop: '24px', }}>
+            <p>姓名<span>*</span></p>
             <input type="text" />
           </div>
-          <div>
-            邮箱：*
+          <div className="input">
+            <p>邮箱<span>*</span></p>
             <input type="text" />
           </div>
-          <div>
-            电话：*
+          <div className="input">
+            <p>电话<span>*</span></p>
             <input type="text" />
           </div>
-          <div>
-            留言：*
-            <input type="text" />
+          <div className="input">
+            <p>留言<span>*</span></p>
+            <textarea type="text" />
+          </div>
+          <div className="input">
+            <div className="btn">提交</div>
           </div>
         </div>
         <div className="row">
-          
+          <div className="map"></div>
         </div>
       </div>
     </div>

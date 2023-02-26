@@ -16,10 +16,10 @@ export default () => {
   useEffect(() => { getData() }, [])
 
   return (
-    <div className="about">
+    <div className="wrap">
       <div className="title">ABOUT 关于梵本</div>
       <div
-        className="content"
+        className="about"
         dangerouslySetInnerHTML={{
           __html: data,
         }}
