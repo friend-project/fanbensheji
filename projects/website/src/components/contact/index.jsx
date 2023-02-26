@@ -1,19 +1,52 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import r from '../../library/request'
 import './style.scss'
 
 export default () => {
-  const [data, setData] = useState('')
+  const [tip, setTip] = useState('')
+  const [name, setName] = useState('')
+  const [mail, setMail] = useState('')
+  const [tel, setTel] = useState('')
+  const [message, setMessage] = useState('')
 
-  const getData = async () => {
+  const submit = async () => {
+    if (!name.length) {
+      setTip('请填写姓名！')
+      return
+    }
+    if (!mail.length) {
+      setTip('请填写邮箱！')
+      return
+    }
+    if (!tel.length) {
+      setTip('请填写电话号码！')
+      return
+    }
+    if (tel && !(/^1[345789]\d{9}$/).test(tel)) {
+      setTip('电话号码格式错误')
+      return
+    }
+    if (mail && !(/^[A-Za-z0-9-_\u4e00-\u9fa5\.]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/).test(mail)) {
+      setTip('邮箱格式错误！')
+      return
+    }
+    
     const rst = await r(
-      '/about',
-      {},
-      'GET',
+      '/contact',
+      {
+        name,
+        mail,
+        tel,
+        message,
+      },
+      'POST',
     )
-    setData(rst?.data?.content)
+    if (!rst.code) {
+      setTip('提交成功！')
+    } else {
+      setTip('提交失败！')
+    }
   }
-  useEffect(() => { getData() }, [])
 
   return (
     <div className="wrap">
@@ -28,27 +61,37 @@ export default () => {
           </div>
           <div className="input" style={{ marginTop: '24px', }}>
             <p>姓名<span>*</span></p>
-            <input type="text" />
+            <input type="text" value={name} onChange={({ target }) => setName(target.value)} />
           </div>
           <div className="input">
             <p>邮箱<span>*</span></p>
-            <input type="text" />
+            <input type="text" value={mail} onChange={({ target }) => setMail(target.value)} />
           </div>
           <div className="input">
             <p>电话<span>*</span></p>
-            <input type="text" />
+            <input type="text" value={tel} onChange={({ target }) => setTel(target.value)} />
           </div>
           <div className="input">
-            <p>留言<span>*</span></p>
-            <textarea type="text" />
+            <p>留言</p>
+            <input type="text" value={message} onChange={({ target }) => setMessage(target.value)} />
           </div>
           <div className="input">
-            <div className="btn">提交</div>
+            <div className="btn" onClick={() => submit()}>提交</div>
           </div>
         </div>
         <div className="row">
           <div className="map"></div>
         </div>
+        {
+          tip ? (
+            <div className="tip_bg"  onClick={() => setTip('')}>
+              <div className="tip">
+                <p>{tip}</p>
+                <div className="btn" onClick={() => setTip('')}>确定</div>
+              </div>
+            </div>
+          ) : null
+        }
       </div>
     </div>
   )

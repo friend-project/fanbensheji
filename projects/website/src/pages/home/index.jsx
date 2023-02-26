@@ -11,9 +11,9 @@ export default () => {
   return (
     <>
       <Header />
-      {false ? <About /> : null}
-      {false ? <Project /> : null}
-      {false ? <Workflow /> : null}
+      {true ? <About /> : null}
+      {true ? <Project /> : null}
+      {true ? <Workflow /> : null}
       {true ? <Contact /> : null}
       {true ? <Footer /> : null}
     </>

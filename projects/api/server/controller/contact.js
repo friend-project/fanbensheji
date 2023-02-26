@@ -43,6 +43,40 @@ const getContact = async (ctx) => {
   }
 }
 
+const postContact = async (ctx) => {
+  try {
+    const {
+      name,
+      mail,
+      tel,
+      message,
+    } = ctx.request.body
+
+    const rst = await ctx.sql.contact
+      .create({
+        name,
+        mail,
+        tel,
+        message,
+      })
+
+    ctx.body = {
+      code: rst ? 0 : 1,
+      msg: !rst ? '提交失败!' : '',
+      data: rst|| {},
+    }
+
+  } catch(err) {
+    ctx.logger.error(err)
+    ctx.body = {
+      code: 1,
+      msg: 'error',
+      data: {},
+    }
+  }
+}
+
 module.exports = {
   'GET /contact': getContact,
+  'POST /contact': postContact,
 }
