@@ -1,4 +1,4 @@
-const port = 9528
+const port = 9529
 
 module.exports = {
   port,
