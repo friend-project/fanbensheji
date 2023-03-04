@@ -1,10 +1,10 @@
-import { useNavigate } from 'react-router-dom'
 import './style.scss'
 
-export default () => {
-  return (
-    <div className="wrap">
-      <div className="footer">Copyright © 2023 北京梵本装饰有限公司 版权所有 备案号：<a href="">京ICP备xxxxxx号-1</a></div>
+export default () => (
+  <div className="wrap">
+    <div className="footer">
+      <p>Copyright © {new Date().getFullYear()} 北京梵本装饰有限公司版权所有</p>
+      <p>备案号：<a  href="https://beian.miit.gov.cn/" target="_blank">京ICP备2023002952号-1</a></p>
     </div>
-  )
-}
+  </div>
+)

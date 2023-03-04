@@ -1,3 +1,6 @@
+import { Element, animateScroll as scroll } from 'react-scroll'
+
+
 import './style.scss'
 
 import Header from '../../components/header'
@@ -11,11 +14,19 @@ export default () => {
   return (
     <>
       <Header />
-      {true ? <About /> : null}
-      {true ? <Project /> : null}
-      {true ? <Workflow /> : null}
-      {true ? <Contact /> : null}
-      {true ? <Footer /> : null}
+      <Element>
+        <About />
+      </Element>
+      <Element>
+        <Project />
+      </Element>
+      <Element>
+        <Workflow />
+      </Element>
+      <Element>
+        <Contact />
+      </Element>
+      <Footer />
     </>
   )
 }

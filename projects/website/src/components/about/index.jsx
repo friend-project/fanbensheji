@@ -16,8 +16,8 @@ export default () => {
   useEffect(() => { getData() }, [])
 
   return (
-    <div className="wrap">
-      <div className="title">ABOUT 关于梵本</div>
+    <div className="wrap" id="about">
+      {/* <div className="title">ABOUT 关于梵本</div> */}
       <div
         className="about"
         dangerouslySetInnerHTML={{

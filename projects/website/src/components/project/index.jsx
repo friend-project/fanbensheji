@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { api } from '../../config/config'
 import r from '../../library/request'
 import './style.scss'
 
 export default () => {
+  const navigate = useNavigate()
   const [data, setData] = useState([])
 
   const getData = async () => {
@@ -12,22 +15,24 @@ export default () => {
       {},
       'GET',
     )
-    console.log(rst.data)
     setData(rst?.data)
   }
   useEffect(() => { getData() }, [])
 
   return (
-    <div className="wrap">
+    <div className="wrap" id="project">
       <div className="title">PROJECT 作品</div>
       <div className="project">
         <div className="inner">
           {
             data.map(
               (v) => (
-                <div className="row">
+                <div
+                  key={v.id}
+                  className="row" onClick={() => navigate(`/project/${v.id}`)}
+                >
                   <div className="img">
-                    <img
+                    <LazyLoadImage
                       src={`${api}/${v.banner}`}
                       alt={v.title}
                     />

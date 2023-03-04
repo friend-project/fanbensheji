@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import {Map, Marker, NavigationControl, InfoWindow, ZoomControl} from 'react-bmapgl';
 import r from '../../library/request'
 import './style.scss'
 
@@ -49,7 +50,7 @@ export default () => {
   }
 
   return (
-    <div className="wrap">
+    <div className="wrap" id="contact">
       <div className="title">CONTACT 联系我们</div>
       <div className="contact">
         <div className="row">
@@ -80,7 +81,26 @@ export default () => {
           </div>
         </div>
         <div className="row">
-          <div className="map"></div>
+          <div className="map">
+            <Map
+              center={{lng: 116.445021, lat: 40.056205}}
+              zoom="15"
+              enableDoubleClickZoom={true}
+              enableDragging={true}
+              enableScrollWheelZoom={true}
+            >
+              <Marker
+                position={{lng: 116.445021, lat: 40.056205}}
+              />
+              <NavigationControl /> 
+              <InfoWindow
+                position={{lng: 116.445021, lat: 40.056205}}
+                text="北京市朝阳区北苑东路乐想汇3号楼831"
+                title="梵本设计"
+              />
+              <ZoomControl />
+            </Map>
+          </div>
         </div>
         {
           tip ? (

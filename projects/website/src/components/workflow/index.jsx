@@ -17,7 +17,7 @@ export default () => {
   useEffect(() => { getData() }, [])
 
   return (
-    <div className="wrap">
+    <div className="wrap" id="workflow">
       <div className="title">WORKFLOW 工作流程</div>
       <div className="workflow">
         {

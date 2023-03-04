@@ -3,6 +3,7 @@ import {
   Route,
 } from 'react-router-dom'
 import Home from './pages/home'
+import Project from './pages/project'
 
 function App() {
   // 北京梵本装饰有限公司
@@ -11,6 +12,10 @@ function App() {
       <Route
         path="/"
         element={<Home />}
+      />
+      <Route
+        path="/project"
+        element={<Project />}
       />
     </Routes>
   )
