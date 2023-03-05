@@ -13,7 +13,12 @@ const logger = require('../library/logger')
 const app = new Koa()
 const port = process.env.PORT || appConfig.port || 9529
 
-app.use(cors())
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+)
 app.use(
   bodyParser({
     multipart: true,
