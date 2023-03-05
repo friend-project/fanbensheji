@@ -15,7 +15,7 @@ const port = process.env.PORT || appConfig.port || 9529
 
 app.use(
   cors({
-    origin: true,
+    origin: '*',
     credentials: true,
   })
 )

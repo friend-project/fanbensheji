@@ -1,2 +1,1 @@
-// export const api = 'https://api.fanbensheji.com'
-export const api = ''
+export const api = 'https://api.fanbensheji.com'
