@@ -205,6 +205,7 @@ export default () => {
           nav.map(
             (v) => (
               <Link
+                key={v.nick}
                 activeClass="active"
                 to={v.nick}
                 spy={true}

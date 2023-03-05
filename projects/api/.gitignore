@@ -1,5 +1,6 @@
 # IDE
 .DS_Store
+upload/
 
 # dependencies
 node_modules
