@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-// import LazyLoad from 'react-lazyload'
 import LazyLoad from 'react-lazy-load'
 import { api } from '../../config/config'
 import r from '../../library/request'
@@ -38,8 +37,6 @@ export default () => {
                 >
                   <div className="img">
                     <LazyLoad
-                      // height={410}
-                      // width={410}
                       threshold={0.95}
                     >
                       <img

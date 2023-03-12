@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react'
+import LazyLoad from 'react-lazy-load'
+
 import { api } from '../../config/config'
 import r from '../../library/request'
 import './style.scss'
@@ -26,14 +28,20 @@ export default () => {
         {
           data.map(
             (v, i) => (
-              <div key={v.id} className="row">
-                <div className="t">
-                  <img src={`${api}/${v.icon}`} alt="" />
-                  <span>{i + 1}. {v.title}</span>
-                </div>
-                <p>{v.describe}</p>
-                <b>{v.price}</b>
-              </div>
+              <LazyLoad
+                threshold={0.95}
+                className="row"
+                key={v.id}
+              >
+                <>
+                  <div className="t">
+                    <img src={`${api}/${v.icon}`} alt="" />
+                    <span>{i + 1}. {v.title}</span>
+                  </div>
+                  <p>{v.describe}</p>
+                  <b>{v.price}</b>
+                </>
+              </LazyLoad>
             )
           )
         }
