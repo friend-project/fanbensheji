@@ -1,6 +1,6 @@
 const Koa = require('koa')
 const path = require('path')
-const cors = require('kcors')
+const cors = require('@koa/cors')
 const serve = require('koa-static')
 const onerror = require('koa-onerror')
 const bodyParser = require('koa-body')
