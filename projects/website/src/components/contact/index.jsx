@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import {Map, Marker, NavigationControl, InfoWindow, ZoomControl} from 'react-bmapgl';
+import { Map, Marker, NavigationControl, InfoWindow, ZoomControl } from 'react-bmapgl'
+
 import r from '../../library/request'
 import './style.scss'
 
@@ -31,7 +32,7 @@ export default () => {
       setTip('邮箱格式错误！')
       return
     }
-    
+
     const rst = await r(
       '/contact',
       {

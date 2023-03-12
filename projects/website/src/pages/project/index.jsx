@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import ImgsViewer from 'react-viewer'
-import _ from 'lodash'
+import { flatMap } from 'lodash'
 
 import r from '../../library/request'
 import Header from '../../components/header'
@@ -24,7 +24,7 @@ export default () => {
     setData(rst.data)
     if (rst.data.content.length) {
       let c = JSON.parse(rst.data.content)
-      c = _.flatMap(c.filter(v => v.type === 'pic').map(v => v.data))
+      c = flatMap(c.filter(v => v.type === 'pic').map(v => v.data))
       setImgs(c)
     }
   }
