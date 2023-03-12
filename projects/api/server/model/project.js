@@ -14,6 +14,7 @@ const project = sequelize.define(
     banner: Sequelize.STRING(128),
     year: Sequelize.STRING(128),
     recommend: Sequelize.TINYINT,
+    content: Sequelize.STRING,
   },
   {
     timestamps: true,

@@ -20,7 +20,10 @@ export default () => {
   useEffect(() => { getData() }, [])
 
   return (
-    <div className="wrap" id="project">
+    <div
+      className="wrap"
+      id="project"
+    >
       <div className="title">PROJECT 作品</div>
       <div className="project">
         <div className="inner">

@@ -50,7 +50,10 @@ export default () => {
   }
 
   return (
-    <div className="wrap" id="contact">
+    <div
+      className="wrap"
+      id="contact"
+    >
       <div className="title">CONTACT 联系我们</div>
       <div className="contact">
         <div className="row">

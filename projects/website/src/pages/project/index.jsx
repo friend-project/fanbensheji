@@ -1,50 +1,33 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import * as cheerio from 'cheerio'
+import ImgsViewer from 'react-viewer'
+import _ from 'lodash'
+
 import r from '../../library/request'
 import Header from '../../components/header'
+import { api } from '../../config/config'
 
 import './style.scss'
 
 export default () => {
-  const { id } = useParams()
+  const params = useParams()
   const [data, setData] = useState({})
   const [tag, setTag] = useState([])
   const [imgs, setImgs] = useState([])
+  const [show, setShow] = useState(false)
+  const [activeIndex, setActiveIndex] = useState()
 
   const getData = async () => {
-    const t = await r(
-      '/tag',
-      {},
-      'GET',
-    )
+    const t = await r('/tag', {}, 'GET')
+    const rst = await r(`/project?id=${params.id}`, {}, 'GET')
     setTag(t.data)
-     const rst = await r(
-      `/project?id=${id}`,
-      {},
-      'GET',
-    )
     setData(rst.data)
-    const $ = cheerio.load(rst?.data?.content)
-    const a = Array.from($('p')).map(
-      (v) => {
-        if (v?.children && v?.children[0] && v?.children[0]?.attributes && v?.children[0]?.attributes[0]) {
-          return 'a'
-        }
-        console.log(v?.children[0]?.text)
-        // v?.children && v?.children[0] && v?.children[0]?.attributes && v?.children[0]?.attributes[0] ? v?.children[0]?.attributes[0]?.value : v?.children[0]?.text
-      }
-    )
-    console.log(a)
-    /*
-    const b = Array.from($('p img'))
-    const c = b.map(
-      (v) => v.attributes[0].value
-    )
-    console.log(c)
-    */
+    if (rst.data.content.length) {
+      let c = JSON.parse(rst.data.content)
+      c = _.flatMap(c.filter(v => v.type === 'pic').map(v => v.data))
+      setImgs(c)
+    }
   }
-
   useEffect(() => { getData() }, [])
 
   return (
@@ -58,11 +41,58 @@ export default () => {
         </div>
         <div
           className="content"
-          dangerouslySetInnerHTML={{
-            __html: data.content,
-          }}
-        />
+        >
+          {
+            data?.content?.length && JSON.parse(data.content).map(
+              (v, i) => (
+                v.type === 'text' ? (
+                  <p
+                    className="text"
+                    key={`${v.data}${i}`}
+                  >
+                    {v.data}
+                  </p>
+                ) : (
+                  v.data.map(
+                    (m) => (
+                      <div
+                        key={m}
+                        className="img"
+                        onClick={
+                          () => {
+                            console.log(imgs.indexOf(m))
+                            setActiveIndex(imgs.indexOf(m))
+                            setShow(true)
+                          }
+                        }
+                      >
+                        <img src={`${api}/${m}`} />
+                      </div>
+                    )
+                  )
+                )
+              )
+            )
+          }
+        </div>
       </div>
+      {
+        imgs.length ? (
+          <ImgsViewer
+            images={
+              imgs.map(
+                (v) => ({
+                  src: `${api}/${v}`,
+                  alt: '',
+                }),
+              )
+            }
+            visible={show}
+            onClose={() => setShow(false)}
+            activeIndex={activeIndex}
+          />
+        ) : null
+      }
     </>
   )
 }

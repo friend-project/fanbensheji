@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams, useParams } from 'react-router-dom'
 import classNames from 'classnames'
-import { Link, animateScroll as scroll } from 'react-scroll'
+import { Link, animateScroll as scroll, scroller } from 'react-scroll'
 
 import './style.scss'
 
 export default () => {
   const navigate = useNavigate()
+  const params = useParams()
   const [show, setShow] = useState(false)
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState('')
@@ -29,7 +30,7 @@ export default () => {
       nick: 'contact',
     },
   ]
-  
+
   const scrollTop = () => {
     const top = document.body.scrollTop || document.documentElement.scrollTop
     if (top > 2000) {
@@ -43,13 +44,37 @@ export default () => {
       setFixed(false)
     }
   }
+  useEffect(() => { document.addEventListener('scroll', scrollTop) }, [])
 
+  const handleClick = (v) => {
+    scroller.scrollTo(
+      v,
+      {
+        duration: 1500,
+        // delay: 100,
+        smooth: 'linear',
+        // offset: -54,
+      }
+    )
+  }
   useEffect(
     () => {
-      document.addEventListener('scroll', scrollTop)
+      // const hash = location.hash.replace('#', '')
+      // if (hash) setTimeout(handleClick(hash), 100)
     },
     [],
   )
+
+
+  const jump = (v) => {
+    if (params.id) {
+      navigate(`/#${v.nick}`)
+    } else {
+      setActive(v.nick)
+      setOpen(false)
+      handleClick(v.nick)
+    }
+  }
 
   return (
     <>
@@ -100,23 +125,25 @@ export default () => {
                       active: active === v.nick
                     })
                   }
+                  onClick={() => jump(v)}
                 >
-                  <Link
-                    activeClass="active"
-                    to={v.nick}
-                    spy={true}
-                    smooth={true}
-                    duration={500}
-                    onSetActive={
-                      () => {
-                        setActive(v.nick)
-                        setOpen(false)
-                      }
-                    }
-                  >
-                    <p>{v.nick.toUpperCase()}</p>
-                    <p>{v.name}</p>
-                  </Link>
+                  <p>{v.nick.toUpperCase()}</p>
+                  <p>{v.name}</p>
+                  {
+                    /*
+                      <Link
+                        activeClass="active"
+                        to={v.nick}
+                        spy={true}
+                        smooth={true}
+                        duration={500}
+                        onSetActive={() => jump(v)}
+                      >
+                        <p>{v.nick.toUpperCase()}</p>
+                        <p>{v.name}</p>
+                      </Link>
+                    */
+                  }
                 </li>
               )
             )
@@ -175,23 +202,25 @@ export default () => {
                           active: active === v.nick
                         })
                       }
+                      onClick={() => jump(v)}
                     >
-                      <Link
-                        activeClass="active"
-                        to={v.nick}
-                        spy={true}
-                        smooth={true}
-                        duration={500}
-                        onSetActive={
-                          () => {
-                            setActive(v.nick)
-                            setOpen(false)
-                          }
-                        }
-                      >
-                        <p>{v.nick.toUpperCase()}</p>
-                        <p>{v.name}</p>
-                      </Link>
+                      <p>{v.nick.toUpperCase()}</p>
+                      <p>{v.name}</p>
+                      {
+                        /*
+                          <Link
+                            activeClass="active"
+                            // to={v.nick}
+                            spy={true}
+                            smooth={true}
+                            duration={500}
+                            onSetActive={() => { jump(v) }}
+                          >
+                            <p>{v.nick.toUpperCase()}</p>
+                            <p>{v.name}</p>
+                          </Link>
+                        */
+                      }
                     </li>
                   )
                 )
@@ -200,31 +229,35 @@ export default () => {
           </header>
         ) : null
       }
-      <div className="slide">
-        {
-          nav.map(
-            (v) => (
-              <Link
-                key={v.nick}
-                activeClass="active"
-                to={v.nick}
-                spy={true}
-                smooth={true}
-                duration={500}
-                onSetActive={
-                  () => {
-                    setActive(v.nick)
-                    setOpen(false)
-                  }
-                }
-              >
-                <div />
-                <p>{v.nick.toUpperCase()}</p>
-              </Link>
-            )
-          )
-        }
-      </div>
+      {
+        !params.id ? (
+          <div className="slide">
+            {
+              nav.map(
+                (v) => (
+                  <Link
+                    key={v.nick}
+                    activeClass="active"
+                    to={v.nick}
+                    spy={true}
+                    smooth={true}
+                    duration={500}
+                    onSetActive={
+                      () => {
+                        setActive(v.nick)
+                        setOpen(false)
+                      }
+                    }
+                  >
+                    <div />
+                    <p>{v.nick.toUpperCase()}</p>
+                  </Link>
+                )
+              )
+            }
+          </div>
+        ) : null
+      }
       {
         show ? (
           <div
