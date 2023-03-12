@@ -5,6 +5,7 @@
     "prod": "pm2 start ./config/pm2.prod.json"
   },
   "dependencies": {
+    "@koa/cors": "^4.0.0",
     "axios": "^0.20.0",
     "axios-extra": "0.0.5",
     "child_process": "^1.0.2",

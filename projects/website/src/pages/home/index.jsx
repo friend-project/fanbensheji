@@ -30,9 +30,11 @@ export default () => {
       <Element>
         <Workflow />
       </Element>
+      {/*
         <Element>
           <Contact />
         </Element>
+      */}
       <Footer />
     </>
   )

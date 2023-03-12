@@ -43,3 +43,23 @@ p {
     color: #8E8E8E;
   }
 }
+
+.backtop {
+  position: fixed;
+  right: 20px;
+  bottom: 40px;
+
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+.LazyLoad {
+  transition: all 1s ease-in-out;
+}
+
+.is-visible {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-name: fadeInUp;
+}

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { LazyLoadImage } from 'react-lazy-load-image-component'
+// import LazyLoad from 'react-lazyload'
+import LazyLoad from 'react-lazy-load'
 import { api } from '../../config/config'
 import r from '../../library/request'
 import './style.scss'
@@ -32,13 +33,20 @@ export default () => {
               (v) => (
                 <div
                   key={v.id}
-                  className="row" onClick={() => navigate(`/project/${v.id}`)}
+                  className="row"
+                  onClick={() => navigate(`/project/${v.id}`)}
                 >
                   <div className="img">
-                    <LazyLoadImage
-                      src={`${api}/${v.banner}`}
-                      alt={v.title}
-                    />
+                    <LazyLoad
+                      // height={410}
+                      // width={410}
+                      threshold={0.95}
+                    >
+                      <img
+                        src={`${api}/${v.banner}`}
+                        alt={v.title}
+                      />
+                    </LazyLoad>
                   </div>
                   <p>{v.title}</p>
                 </div>
