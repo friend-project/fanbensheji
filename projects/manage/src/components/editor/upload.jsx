@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { PlusOutlined, CloseCircleOutlined } from '@ant-design/icons'
 import { Modal, Upload } from 'antd'
 import { api } from '../../config/config'
@@ -51,69 +51,74 @@ const Uploads = ({
     [fileList],
   )
 
-  return (
-    <>
-      <div
-        style={{
-          position: 'relative',
-        }}
-      >
+  const component = useMemo(
+    () => (
+      <>
         <div
           style={{
-            position: 'absolute',
-            top: '-14px',
-            right: '-14px',
-            cursor: 'pointer',
+            position: 'relative',
           }}
-          onClick={() => onChange({ ...data, handle: 'delete' })}
         >
-          <CloseCircleOutlined />
-        </div>
-        <Upload
-          name="file"
-          data={{
-            fileType: 'project',
-          }}
-          listType="picture-card"
-          fileList={
-            fileList.map(
-              (v, i) => (
-                typeof v === 'string'
-                  ? {
-                    id: i,
-                    uid: i,
-                    name: v,
-                    status: 'done',
-                    url: `${api}/${v}`,
-                  }
-                  : v
-              )
-            )
-          }
-          onPreview={handlePreview}
-          multiple={true}
-          onChange={handleChange}
-          action={`${api}/api/upload`}
-        >
-          <div>
-            <PlusOutlined />
-            <div style={{ marginTop: 8 }}>Upload</div>
+          <div
+            style={{
+              position: 'absolute',
+              top: '-14px',
+              right: '-14px',
+              cursor: 'pointer',
+            }}
+            onClick={() => onChange({ ...data, handle: 'delete' })}
+          >
+            <CloseCircleOutlined />
           </div>
-        </Upload>
-      </div>
-      <Modal
-        open={previewOpen}
-        title={previewTitle}
-        footer={null}
-        onCancel={handleCancel}
-      >
-        <img
-          style={{ width: '100%' }}
-          src={previewImage}
-        />
-      </Modal>
-    </>
+          <Upload
+            name="file"
+            data={{
+              fileType: 'project',
+            }}
+            listType="picture-card"
+            fileList={
+              fileList.map(
+                (v, i) => (
+                  typeof v === 'string'
+                    ? {
+                      id: i,
+                      uid: i,
+                      name: v,
+                      status: 'done',
+                      url: `${api}/${v}`,
+                    }
+                    : v
+                )
+              )
+            }
+            onPreview={handlePreview}
+            multiple={true}
+            onChange={handleChange}
+            action={`${api}/api/upload`}
+          >
+            <div>
+              <PlusOutlined />
+              <div style={{ marginTop: 8 }}>Upload</div>
+            </div>
+          </Upload>
+        </div>
+        <Modal
+          open={previewOpen}
+          title={previewTitle}
+          footer={null}
+          onCancel={handleCancel}
+        >
+          <img
+            style={{ width: '100%' }}
+            src={previewImage}
+          />
+        </Modal>
+      </>
+    ),
+    [fileList]
   )
+
+  return component
 }
 
 export default Uploads
