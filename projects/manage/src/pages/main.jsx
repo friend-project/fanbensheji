@@ -16,10 +16,9 @@ import Press from './press'
 import Awards from './awards'
 import About from './about'
 import Contact from './contact'
+import Company from './company'
 
 const { Content } = Layout;
-
-
 
 const App = () => {
   const {
@@ -55,6 +54,7 @@ const App = () => {
               <Route path="awards" element={<Awards />} />
               <Route path="about" element={<About />} />
               <Route path="contact" element={<Contact />} />
+              <Route path="company" element={<Company />} />
             </Routes>
           </Content>
         </Layout>

@@ -1,14 +1,16 @@
 const Sequelize = require('sequelize')
 
-const getAbout = async (ctx) => {
+const getCompany = async (ctx) => {
   try {
-    const rst = await ctx.sql.about
+    const rst = await ctx.sql.company
       .findOne({
         attributes: [
           'id',
-          'content',
-          'create_time',
-          'update_time',
+          'company',
+          'logo',
+          'tel',
+          'mail',
+          'address',
         ],
         where: {
           id: 1,
@@ -30,14 +32,24 @@ const getAbout = async (ctx) => {
   }
 }
 
-const putAbout = async (ctx) => {
+const putCompany = async (ctx) => {
   try {
-    const { content } = ctx.request.body
+    const {
+      company,
+      logo,
+      tel,
+      mail,
+      address,
+    } = ctx.request.body
 
-    rst = await ctx.sql.about
+    rst = await ctx.sql.company
       .update(
         {
-          content,
+          company,
+          logo,
+          tel,
+          mail,
+          address,
         },
         {
           where: {
@@ -63,6 +75,6 @@ const putAbout = async (ctx) => {
 }
 
 module.exports = {
-  'GET /about': getAbout,
-  'PUT /about': putAbout,
+  'GET /company': getCompany,
+  'PUT /company': putCompany,
 }

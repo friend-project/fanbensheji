@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Map, Marker, NavigationControl, InfoWindow, ZoomControl } from 'react-bmapgl'
 
 import r from '../../library/request'
@@ -10,6 +10,17 @@ export default () => {
   const [mail, setMail] = useState('')
   const [tel, setTel] = useState('')
   const [message, setMessage] = useState('')
+  const [company, setCompany] = useState({})
+
+  const getData = async () => {
+    const rst = await r(
+      '/company',
+      {},
+      'GET',
+    )
+    setCompany(rst.data)
+  }
+  useEffect(() => { getData() }, [])
 
   const submit = async () => {
     if (!name.length) {
@@ -59,10 +70,10 @@ export default () => {
       <div className="contact">
         <div className="row">
           <div>
-            <p>梵本设计 Fanben Design</p>
-            <p>电话：139 1125 8805</p>
-            <p>邮箱：fanbensheji@126.com</p>
-            <p>地址：北京市朝阳区北苑东路乐想汇3号楼831</p>
+            <p>{company.company}</p>
+            <p>电话：{company.tel}</p>
+            <p>邮箱：{company.mail}</p>
+            <p>地址：{company.address}</p>
           </div>
           <div className="input" style={{ marginTop: '24px', }}>
             <p>姓名<span>*</span></p>
@@ -96,9 +107,11 @@ export default () => {
               <Marker
                 position={{lng: 116.445021, lat: 40.056205}}
               />
-              <NavigationControl /> 
+              <NavigationControl />
               <InfoWindow
                 position={{lng: 116.445021, lat: 40.056205}}
+                // text={company.address || '北京市朝阳区北苑东路乐想汇3号楼831'}
+                // title={company.company || '梵本装饰'}
                 text="北京市朝阳区北苑东路乐想汇3号楼831"
                 title="梵本设计"
               />

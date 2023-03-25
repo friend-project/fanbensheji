@@ -3,6 +3,9 @@ import { useNavigate, useSearchParams, useParams } from 'react-router-dom'
 import classNames from 'classnames'
 import { Link, animateScroll as scroll, scroller } from 'react-scroll'
 
+import { api } from '../../config/config'
+import r from '../../library/request'
+
 import './style.scss'
 
 export default () => {
@@ -12,6 +15,7 @@ export default () => {
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState('')
   const [fixed, setFixed] = useState(false)
+  const [logo, setLogo] = useState('')
   const nav = [
     {
       name: '关于我们',
@@ -44,7 +48,22 @@ export default () => {
       setFixed(false)
     }
   }
-  useEffect(() => { document.addEventListener('scroll', scrollTop) }, [])
+
+  const getData = async () => {
+    const rst = await r(
+      '/company',
+      {},
+      'GET',
+    )
+    setLogo(`${api}/${rst.data.logo}`)
+  }
+  useEffect(
+    () => {
+      document.addEventListener('scroll', scrollTop)
+      getData()
+    },
+    [],
+  )
 
   const handleClick = (v) => {
     scroller.scrollTo(
@@ -87,8 +106,8 @@ export default () => {
       >
         <div className="logo">
           <img
-            src="/logo.png"
-            alt="范本设计"
+            src={logo}
+            alt="北京梵本装饰有限公司"
             onClick={() => navigate('/')}
           />
           <div

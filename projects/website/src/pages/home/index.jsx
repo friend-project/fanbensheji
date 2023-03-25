@@ -1,4 +1,3 @@
-import { useSearchParams } from 'react-router-dom'
 import { Element, animateScroll as scroll } from 'react-scroll'
 
 
@@ -11,13 +10,7 @@ import Workflow from '../../components/workflow'
 import Contact from '../../components/contact'
 import Footer from '../../components/footer'
 
-import Detail from '../project'
-
 export default () => {
-  let [searchParams, setSearchParams] = useSearchParams()
-  const id = searchParams.get('id')
-
-  if (id) return <Detail />
   return (
     <>
       <Header />
@@ -30,11 +23,9 @@ export default () => {
       <Element>
         <Workflow />
       </Element>
-      {/*
-        <Element>
-          <Contact />
-        </Element>
-      */}
+      <Element>
+        <Contact />
+      </Element>
       <Footer />
     </>
   )
