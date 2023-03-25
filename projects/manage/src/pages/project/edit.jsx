@@ -27,7 +27,7 @@ export default () => {
   const [recommend, setRecommend] = useState(0)
   const [banner, setBanner] = useState('')
   const [loading, setLoading] = useState(false)
-  const [content, setContent] = useState(null)
+  const [content, setContent] = useState([])
   const getData = async () => {
     const rstTag = await r(
       '/tag',
@@ -216,17 +216,13 @@ export default () => {
       </div>
       <div className="row">
         <p>内容：</p>
-        {
-          content !== null ? (
-            <Content
-              style={{
-                width: 'calc(100% - 50px)',
-              }}
-              data={content}
-              onChange={(v) => setContent(v)}
-            />
-          ) : null
-        }
+        <Content
+          style={{
+            width: 'calc(100% - 50px)',
+          }}
+          data={content}
+          onChange={(v) => setContent(v)}
+        />
       </div>
       <div className="row">
         <p></p>
