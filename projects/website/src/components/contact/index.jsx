@@ -110,8 +110,6 @@ export default () => {
               <NavigationControl />
               <InfoWindow
                 position={{lng: 116.524026, lat: 39.97422}}
-                // text={company.address || '北京市朝阳区北苑东路乐想汇3号楼831'}
-                // title={company.company || '梵本装饰'}
                 text="北京市朝阳区七棵树创意园B7-0008（进园区直行第二路口左转）"
                 title="梵本设计"
               />

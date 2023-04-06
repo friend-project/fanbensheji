@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react'
 import LazyLoad from 'react-lazy-load'
 
+import { LazyLoadImage } from 'react-lazy-load-image-component'
+import 'react-lazy-load-image-component/src/effects/blur.css'
+
 import { api } from '../../config/config'
 import r from '../../library/request'
 import './style.scss'
@@ -35,7 +38,11 @@ export default () => {
               >
                 <>
                   <div className="t">
-                    <img src={`${api}/${v.icon}`} alt="" />
+                    <LazyLoadImage
+                      alt={v.title}
+                      effect={'blur'}
+                      src={`${api}/${v.icon}`}
+                    />
                     <span>{i + 1}. {v.title}</span>
                   </div>
                   <p>{v.describe}</p>

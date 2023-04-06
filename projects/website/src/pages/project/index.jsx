@@ -3,6 +3,9 @@ import { useParams } from 'react-router-dom'
 import ImgsViewer from 'react-viewer'
 import { flatMap } from 'lodash'
 
+import { LazyLoadImage } from 'react-lazy-load-image-component'
+import 'react-lazy-load-image-component/src/effects/blur.css'
+
 import r from '../../library/request'
 import Header from '../../components/header'
 import { api } from '../../config/config'
@@ -66,7 +69,11 @@ export default () => {
                           }
                         }
                       >
-                        <img src={`${api}/${m}`} />
+                        <LazyLoadImage
+                          alt={v.title}
+                          effect={'blur'}
+                          src={`${api}/${m}`}
+                        />
                       </div>
                     )
                   )

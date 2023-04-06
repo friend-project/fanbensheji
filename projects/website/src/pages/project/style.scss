@@ -49,6 +49,7 @@
       overflow: hidden;
       margin: 0 0 20px;
       cursor: pointer;
+      vertical-align: top;
 
       &:after {
         position: absolute;
@@ -63,9 +64,16 @@
         transition: opacity 250ms;
       }
 
+      span {
+        display: block!important;
+      }
+
+      img {
+        transition: transform 250ms;
+      }
+
       &:hover {
         img {
-          transition: transform 250ms;
           transform: translateX(-10px) translateY(-10px) scale(1.2);
         }
 
