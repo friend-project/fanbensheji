@@ -27,7 +27,7 @@ export default () => {
   const [recommend, setRecommend] = useState(0)
   const [banner, setBanner] = useState('')
   const [loading, setLoading] = useState(false)
-  const [content, setContent] = useState([])
+  const [content, setContent] = useState(null)
   const getData = async () => {
     const rstTag = await r(
       '/tag',
@@ -169,10 +169,10 @@ export default () => {
           onChange={(v) => setRecommend(v)}
           options={[
             {
-              value: 0, 
+              value: 0,
               label: '不推荐',
             }, {
-              value: 1, 
+              value: 1,
               label: '推荐',
             }
           ]}
@@ -216,13 +216,17 @@ export default () => {
       </div>
       <div className="row">
         <p>内容：</p>
-        <Content
-          style={{
-            width: 'calc(100% - 50px)',
-          }}
-          data={content}
-          onChange={(v) => setContent(v)}
-        />
+        {
+          content !== null ? (
+            <Content
+              style={{
+                width: 'calc(100% - 50px)',
+              }}
+              data={content}
+              onChange={(v) => setContent(v)}
+            />
+          ) : null
+        }
       </div>
       <div className="row">
         <p></p>
