@@ -39,7 +39,10 @@ export default () => {
     } else {
       setTags(rstTag.data)
     }
-    if (!params.id) return
+    if (!params.id) {
+      setContent([])
+      return
+    }
     const rst = await r(
       `/project?id=${params?.id}`,
       {},
