@@ -1,8 +1,38 @@
+.tag {
+  margin: 36px 36px 0;
+  padding: 36px 9px 36px 9px;
+  text-align: center;
+
+  &.position {
+    position: fixed;
+    top: 10px;
+    right: 0;
+    left: 0;
+    z-index: 1;
+
+    background: #fcfcfc;
+  }
+
+  span {
+    padding: 5px 18px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+
+    &.active {
+      color: #ff590a;
+    }
+  }
+}
 .project {
   margin: 36px 36px 0;
   padding: 0 0 36px;
   border: 1px solid rgba(234,234,234,1);
   border-width: 0 0 1px 0;
+
+  &.position {
+    padding-top: 94px;
+  }
 
   .inner {
     display: flex;
@@ -27,7 +57,7 @@
     height: 0;
     padding: 0 0 100%;
     cursor: pointer;
-    
+
     img {
       transition: transform 250ms;
       transform: translateX(0) translateY(0) scale(1);
@@ -66,12 +96,22 @@
 
 
 @media (max-width: 760px) {
-  .project .inner {
-    flex-direction: column;
-    width: 100%;
-
-    .row {
+  .tag {
+    &.position {
+      position: static;
+    }
+  }
+  .project {
+    &.position {
+      padding: 0;
+    }
+    .inner {
+      flex-direction: column;
       width: 100%;
+
+      .row {
+        width: 100%;
+      }
     }
   }
 }

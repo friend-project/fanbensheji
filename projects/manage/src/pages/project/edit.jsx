@@ -28,6 +28,7 @@ export default () => {
   const [banner, setBanner] = useState('')
   const [loading, setLoading] = useState(false)
   const [content, setContent] = useState(null)
+  const [turn, setTurn] = useState(0)
   const getData = async () => {
     const rstTag = await r(
       '/tag',
@@ -57,6 +58,7 @@ export default () => {
       setTitle(rst.data.title)
       setYear(rst.data.year)
       setContent(rst?.data?.content?.length ? JSON.parse(rst.data.content) : [])
+      setTurn(rst?.data?.turn || 0)
     }
   }
   useEffect(() => { getData() }, [])
@@ -230,6 +232,17 @@ export default () => {
             />
           ) : null
         }
+      </div>
+      <div className="row">
+        <p>排序：</p>
+        <Input
+          value={turn}
+          placeholder="请输入排序"
+          onChange={({ target }) => setTurn(target.value)}
+          style={{
+            width: 'calc(100% - 50px)',
+          }}
+        />
       </div>
       <div className="row">
         <p></p>

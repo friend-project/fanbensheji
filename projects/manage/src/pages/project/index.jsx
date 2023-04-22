@@ -47,6 +47,10 @@ export default () => {
             key: 'recommend',
             render: (recommend) => (recommend ? '推荐' : '不推荐')
         }, {
+            title: '排序',
+            dataIndex: 'turn',
+            key: 'turn',
+        }, {
             title: '操作',
             dataIndex: 'id',
             key: 'id',

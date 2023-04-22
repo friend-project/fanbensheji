@@ -35,10 +35,12 @@ export default () => {
             title: '描述',
             dataIndex: 'describe',
             key: 'describe',
+          /*
         }, {
             title: '价格',
             dataIndex: 'price',
             key: 'price',
+          */
         }, {
             title: '排序',
             dataIndex: 'turn',
