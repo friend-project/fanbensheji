@@ -23,13 +23,9 @@ export default () => {
       <Element>
         <Workflow />
       </Element>
-      {
-        false ? (
-          <Element>
-            <Contact />
-          </Element>
-        ) : null
-      }
+      <Element>
+        <Contact />
+      </Element>
       <Footer />
     </>
   )
