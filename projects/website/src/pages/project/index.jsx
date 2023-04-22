@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import ImgsViewer from 'react-viewer'
 import { flatMap } from 'lodash'
+import LazyLoad from 'react-lazy-load'
 
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import 'react-lazy-load-image-component/src/effects/blur.css'
@@ -15,6 +16,7 @@ import './style.scss'
 export default () => {
   const params = useParams()
   const [data, setData] = useState({})
+  const [recommend, setRecommend] = useState([])
   const [tag, setTag] = useState([])
   const [imgs, setImgs] = useState([])
   const [show, setShow] = useState(false)
@@ -23,8 +25,10 @@ export default () => {
   const getData = async () => {
     const t = await r('/tag', {}, 'GET')
     const rst = await r(`/project?id=${params.id}`, {}, 'GET')
+    const recom = await r('/recommend', {}, 'GET')
     setTag(t.data)
     setData(rst.data)
+    setRecommend(recom.data)
     if (rst.data.content.length) {
       let c = JSON.parse(rst.data.content)
       c = flatMap(c.filter(v => v.type === 'pic').map(v => v.data))
@@ -81,6 +85,36 @@ export default () => {
               )
             )
           }
+        </div>
+        <div
+          className="content recommend"
+        >
+          <h2>MORE SELECTED</h2>
+          <div className="inner">
+            {
+              recommend.map(
+                (v) => (
+                  <div
+                    key={v.id}
+                    className="row"
+                    onClick={() => navigate(`/project/${v.id}`)}
+                  >
+                    <div className="img">
+                      <LazyLoad
+                        threshold={0.95}
+                      >
+                        <img
+                          src={`${api}/${v.banner}`}
+                          alt={v.title}
+                        />
+                      </LazyLoad>
+                    </div>
+                    <p>{v.title}</p>
+                  </div>
+                )
+              )
+            }
+          </div>
         </div>
       </div>
       {
