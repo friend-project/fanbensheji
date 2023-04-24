@@ -15,7 +15,7 @@ import Workflow from './workflow'
 import Press from './press'
 import Awards from './awards'
 import About from './about'
-import Contact from './contact'
+// import Contact from './contact'
 import Company from './company'
 
 const { Content } = Layout;
@@ -44,7 +44,7 @@ const App = () => {
             <Routes>
               <Route
                 path="/"
-                element={(<Navigate to='/main/contact' />)}
+                element={(<Navigate to='/main/project' />)}
               />
               <Route path="project" element={<Project />} />
               <Route path="project/add" element={<ProjectEdit />} />
@@ -53,7 +53,9 @@ const App = () => {
               <Route path="press" element={<Press />} />
               <Route path="awards" element={<Awards />} />
               <Route path="about" element={<About />} />
+              {/*
               <Route path="contact" element={<Contact />} />
+              */}
               <Route path="company" element={<Company />} />
             </Routes>
           </Content>

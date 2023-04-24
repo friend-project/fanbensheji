@@ -44,10 +44,12 @@ export default () => {
             name: '关于我们',
             nick: 'about',
         }, {
+          /*
             icon: CommentOutlined,
             name: '联系我们',
             nick: 'contact',
         }, {
+          */
             icon: InfoCircleOutlined,
             name: '公司信息',
             nick: 'company',

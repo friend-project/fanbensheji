@@ -69,12 +69,13 @@ export default () => {
       <div className="title">CONTACT 联系我们</div>
       <div className="contact">
         <div className="row">
-          <div>
+          <div className="company">
             <p>{company.company}</p>
             <p>电话：{company.tel}</p>
             <p>邮箱：{company.mail}</p>
             <p>地址：{company.address}</p>
           </div>
+          {/*
           <div className="input" style={{ marginTop: '24px', }}>
             <p>姓名<span>*</span></p>
             <input type="text" value={name} onChange={({ target }) => setName(target.value)} />
@@ -94,6 +95,7 @@ export default () => {
           <div className="input">
             <div className="btn" onClick={() => submit()}>提交</div>
           </div>
+          */}
         </div>
         <div className="row">
           <div className="map">
