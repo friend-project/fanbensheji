@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { Map, Marker, NavigationControl, InfoWindow, ZoomControl } from 'react-bmapgl'
 
 import r from '../../library/request'
 import './style.scss'
@@ -99,24 +98,7 @@ export default () => {
         </div>
         <div className="row">
           <div className="map">
-            <Map
-              center={{lng: 116.445021, lat: 40.056205}}
-              zoom="15"
-              enableDoubleClickZoom={true}
-              enableDragging={true}
-              enableScrollWheelZoom={true}
-            >
-              <Marker
-                position={{lng: 116.445021, lat: 40.056205}}
-              />
-              <NavigationControl />
-              <InfoWindow
-                position={{lng: 116.524026, lat: 39.97422}}
-                text="北京市朝阳区七棵树创意园B7-0008（进园区直行第二路口左转）"
-                title="梵本设计"
-              />
-              <ZoomControl />
-            </Map>
+            <img src="/address.png" alt="公司地址" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
         </div>
         {

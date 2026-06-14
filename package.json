@@ -12,6 +12,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "workspaces": [
+    "projects/*"
+  ],
   "bugs": {
     "url": "https://github.com/friend-project/fanbensheji/issues"
   },
